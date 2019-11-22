@@ -57,6 +57,8 @@ int main()
 		if (command == "") {
 			string reply;
 			if (commands.size() == 0) reply = "No commands were entered.";
+			else if (commands.size() == 1 && commands[0] == "Who")
+				reply = "Andrew Pavlenko. Variant 3: remote console.";
 			else if (runCommands(commands)) reply = "Commands successfully executed.";
 			else reply = "Oww... An error occured while executing ;(";
 			if (sendto(s, reply.c_str(), reply.length() + 1, 0, (SOCKADDR*)&nsa, sizeof(nsa))

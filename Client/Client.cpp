@@ -26,7 +26,10 @@ int main(int argc, char* argv[])
 	SOCKADDR_IN nsa;
 	int szNsa = sizeof(nsa);
 
-	string inviteMsg = "Enter commands. To finish entering, just enter empty string. To quit, press Ctrl+C.";
+	string inviteMsg = "Enter commands:\n-- either ONLY `Who` command to receive info about "
+		+ (string)"author and task\n-- or cmd commands (in that case `Who` command will be also "
+		+ (string)"perceived as cmd command\nTo finish entering, just enter empty string. "
+		+ (string)"To quit, press Ctrl+C.";
 	cout << inviteMsg << "\n";
 	string command;
 	char buffer[1024];
