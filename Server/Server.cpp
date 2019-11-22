@@ -1,4 +1,5 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 
 #pragma comment(lib, "Ws2_32.lib")
 
@@ -6,8 +7,11 @@
 #include <cstdlib>
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <cstdio>
+#include <chrono>
+#include <ctime>
 
 using namespace std;
 
@@ -47,6 +51,7 @@ int main()
 	vector<string> commands;
 	char buffer[1024];
 	int bufSz = sizeof(buffer);
+	ofstream log;
 
 	while (true) {
 		if (recvfrom(s, buffer, bufSz, 0, (SOCKADDR*)&nsa, &szNsa)  
@@ -68,6 +73,10 @@ int main()
 		}
 		else {
 			commands.push_back(command);
+			time_t now = chrono::system_clock::to_time_t(chrono::system_clock::now());
+			log.open("log.txt", ios_base::out | ios_base::app);
+			log << '`' << command << "` at " << ctime(&now) << '\n';
+			log.close();
 		}
 	}
 
